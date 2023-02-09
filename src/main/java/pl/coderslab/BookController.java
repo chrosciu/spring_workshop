@@ -8,7 +8,7 @@ import java.util.List;
 public class BookController {
     private BookService bookService;
 
-    public BookController(MockBookService bookService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
