@@ -6,10 +6,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/books")
 public class BookController {
-    private MockBookService mockBookService;
+    private BookService bookService;
 
-    public BookController(MockBookService mockBookService) {
-        this.mockBookService = mockBookService;
+    public BookController(MockBookService bookService) {
+        this.bookService = bookService;
     }
 
     @RequestMapping("/helloBook")
@@ -19,27 +19,27 @@ public class BookController {
 
     @RequestMapping("")
     public List<Book> allBooks() {
-        return mockBookService.getAllBooks();
+        return bookService.getAllBooks();
     }
 
     @RequestMapping("/{id}")
     public Book getBook(@PathVariable Long id) {
-        return mockBookService.getBook(id);
+        return bookService.getBook(id);
     }
 
     @PostMapping("")
     public void addBook(@RequestBody Book book) {
-        mockBookService.addBook(book);
+        bookService.addBook(book);
     }
 
     @PutMapping("")
     public void editBook(@RequestBody Book book) {
-        mockBookService.editBook(book);
+        bookService.editBook(book);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable long id) {
-        mockBookService.deleteBook(id);
+        bookService.deleteBook(id);
     }
 
 }

@@ -1,13 +1,13 @@
 package pl.coderslab;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@Component
-public class MockBookService {
+@Service
+public class MockBookService implements BookService {
     private final List<Book> list;
     private static Long nextId;
 
@@ -24,31 +24,36 @@ public class MockBookService {
         nextId = list.stream().map(Book::getId).max(Comparator.naturalOrder()).get();
     }
 
+    @Override
     public List<Book> getAllBooks() {
         return list;
     }
 
-    public Book getBook(Long book_id) {
+    @Override
+    public Book getBook(Long bookId) {
         return list.stream()
-                .filter(b -> b.getId() == book_id)
+                .filter(b -> b.getId() == bookId)
                 .findFirst()
                 .get();
     }
 
+    @Override
     public void addBook(Book book) {
         nextId += 1;
         book.setId(nextId);
         list.add(book);
     }
 
+    @Override
     public void editBook(Book book) {
         int index = list.indexOf(getBook(book.getId()));
         list.set(index, book);
 
     }
 
-    public void deleteBook(long book_id) {
-        list.remove(getBook(book_id));
+    @Override
+    public void deleteBook(long bookId) {
+        list.remove(getBook(bookId));
     }
 
 }
