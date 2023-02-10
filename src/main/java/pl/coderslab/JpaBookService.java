@@ -1,5 +1,6 @@
 package pl.coderslab;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -7,12 +8,9 @@ import java.util.List;
 
 @Service
 @Primary
+@RequiredArgsConstructor
 public class JpaBookService implements BookService {
     private final BookRepository bookRepository;
-
-    public JpaBookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
 
     @Override
     public List<Book> getAllBooks() {
@@ -26,7 +24,7 @@ public class JpaBookService implements BookService {
 
     @Override
     public void addBook(Book book) {
-
+        book.setTitle("AAAA");
     }
 
     @Override

@@ -1,16 +1,23 @@
 package pl.coderslab;
 
-import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/books")
+@RequiredArgsConstructor
+@Slf4j
 public class BookController {
-    private BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
+    private final BookService bookService;
 
     @RequestMapping("/helloBook")
     public Book helloBook() {
@@ -19,6 +26,7 @@ public class BookController {
 
     @RequestMapping("")
     public List<Book> allBooks() {
+        log.info("Get all books");
         return bookService.getAllBooks();
     }
 
